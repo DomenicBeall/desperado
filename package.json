@@ -1,0 +1,25 @@
+{
+  "name": "desperado",
+  "version": "1.0.0",
+  "description": "A web app for finding OTB chess games in your area.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DomenicBeall/desperado.git"
+  },
+  "author": "Domenic Beall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DomenicBeall/desperado/issues"
+  },
+  "homepage": "https://github.com/DomenicBeall/desperado#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
