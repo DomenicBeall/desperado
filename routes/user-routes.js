@@ -95,4 +95,8 @@ module.exports = (app) => {
         
     });
 
+    app.post('/api/refresh', (req, res) => {
+        // TODO: This will be called by the client every once in a while to refresh the JWT
+    });
+
 }
