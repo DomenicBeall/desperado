@@ -7,27 +7,35 @@ module.exports = (app) => {
 
     app.post('/api/login', (req, res) => {
         // Get the user details out of the request body
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
         // Ensure that a username and password is passed correctly
-        if (!username || !password) {
+        if (!email || !password) {
             return res.status(401).end();
         }
 
         // TODO: Some where right here it should check the username and password against the database of users... when the database exists
+        User.findOne({ email: email, password: password}).then(user=> {
+            if (user) {
+                // The user has been found! What're the odds!
 
-        // Create the JWT and put the user details in there
-        // At the moment we're just using the username, but we might need more information later
-        const token = jwt.sign({ username }, jwtKey, {
-            algorithm: "HS256",
-            expiresIn: jwtExpiryTime,
+                // Create the JWT and put the user details in there
+                // At the moment we're just using the whole user, but it's probably not necessary to store all of that
+                const token = jwt.sign(user, jwtKey, {
+                    algorithm: "HS256",
+                    expiresIn: jwtExpiryTime,
+                });
+                
+                // Set a cookie on the user
+                res.cookie("token", token, { maxAge: jwtExpiryTime * 1000 });
+
+                // TODO: Redirect the user to the user page
+                res.send(`You successfully logged in, ${username}!`);
+            } else {
+                // A user with these details was not found
+                return res.status(401).end();
+            }
         });
-        
-        // Set a cookie on the user
-        res.cookie("token", token, { maxAge: jwtExpiryTime * 1000 });
-
-        // TODO: Redirect the user to the user page
-        res.end();
     });
 
     app.post('/api/register', (req, res) => {
@@ -47,9 +55,23 @@ module.exports = (app) => {
             return res.status(401).end();
         }
 
-        // TODO: Check that the email address is not already in use
+        // Check that the email address is not already in use
+        User.findOne({ email: email} ).then(user=> {
+            if (user) {
+                return res.status(401).end();
+            }
+        });
 
-        // TODO: Create a new user using the register details, then login the user
+        // Create a new user using the register details, then login the user
+        User.create({ username: username, password: password, email: email })
+            .then(user => {
+                // Redirect the user to the login, with the same body
+                res.redirect(307, '/api/login');
+            })
+            .catch(error => {
+                res.status(401);
+                res.json(error);
+            });
     });
 
 }
