@@ -21,7 +21,7 @@ module.exports = (app) => {
 
                 // Create the JWT and put the user details in there
                 // At the moment we're just using the whole user, but it's probably not necessary to store all of that
-                const token = jwt.sign(user, jwtKey, {
+                const token = jwt.sign(user, process.env.JWT_KEY, {
                     algorithm: "HS256",
                     expiresIn: jwtExpiryTime,
                 });
