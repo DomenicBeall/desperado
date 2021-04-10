@@ -20,4 +20,4 @@ userRoutes(app);
 
 app.listen(port, () => {
   console.log(`Server is listening at ${port}`);
-})
+});
