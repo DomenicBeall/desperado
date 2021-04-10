@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 // Require in routes
 const userRoutes = require('./routes/user-routes.js');
+const apiRoutes = require('./routes/api-routes.js');
 
 require('dotenv').config();
 
@@ -17,6 +18,7 @@ app.use(cookieParser());
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/desperado", { useNewUrlParser: true });
 
 userRoutes(app);
+apiRoutes(app);
 
 app.listen(port, () => {
   console.log(`Server is listening at ${port}`);
