@@ -13,8 +13,13 @@ function Header() {
     return(
         <div>
             <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <p onClick={onClickHandler}>Logout</p>
+
+            {
+                context.user ?
+                <p onClick={onClickHandler}>Logout</p>
+                :
+                <Link to="/login">Login</Link>
+            }
         </div>
     );
 }

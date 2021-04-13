@@ -17,7 +17,7 @@ module.exports = (app) => {
         // Check the username and password against the database of users... when the database exists
 
         // TODO: So I'm not sure how this has to be done, but this should only return some parts of the user, so that the unencrypted password is not being sent to the client
-        User.findOne({ email: email, password: password }).then(user=> {
+        User.findOne({ email: email, password: password }, 'username email createdAt _id').then(user=> {
             if (user) {
                 // The user has been found! What're the odds!
 
