@@ -33,8 +33,7 @@ module.exports = (app) => {
                         // Set a cookie on the user
                         res.cookie("token", token, { maxAge: jwtExpiryTime * 1000 });
 
-                        // TODO: Redirect the user to the user page
-                        res.status(200).end();
+                        res.json(user);
                     }
                 });
             } else {

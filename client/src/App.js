@@ -3,9 +3,9 @@ import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AuthProvider } from './context/auth';
 
-import Header from './components/header';
-import Home from './pages/home';
-import Login from './pages/login';
+import Header from './components/Header';
+import Home from './pages/Home';
+import Login from './pages/Login';
 
 function App() {
   return (
