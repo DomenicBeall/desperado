@@ -15,13 +15,15 @@ module.exports = (app) => {
         }
 
         // Check the username and password against the database of users... when the database exists
+
+        // TODO: So I'm not sure how this has to be done, but this should only return some parts of the user, so that the unencrypted password is not being sent to the client
         User.findOne({ email: email, password: password }).then(user=> {
             if (user) {
                 // The user has been found! What're the odds!
 
                 // Create the JWT and put the user details in there
                 // At the moment we're just using the whole user, but it's probably not necessary to store all of that
-                jwt.sign( {user}, process.env.JWT_KEY, {
+                jwt.sign( { user }, process.env.JWT_KEY, {
                     algorithm: "HS256",
                     expiresIn: jwtExpiryTime,
                 },
@@ -32,7 +34,7 @@ module.exports = (app) => {
                     } else {
                         // Set a cookie on the user
                         res.cookie("token", token, { maxAge: jwtExpiryTime * 1000 });
-
+                        
                         res.json(user);
                     }
                 });

@@ -22,10 +22,11 @@ userRoutes(app);
 apiRoutes(app);
 
 
-// TODO: This bit of code seems to be insecure, but I don't fully understand CORS and it's the only thing that works. More research must be done.
 function CorsMiddleWare(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); 
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin); // TODO: When this is deployed, change req.headers.origin to the actual domain
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,UPDATE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
   next();
 }
 

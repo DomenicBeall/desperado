@@ -40,7 +40,7 @@ class Form extends Component {
       method: 'POST',
       url: 'http://localhost:3000/api/login', 
       data: { email: this.state.email, password: this.state.password }
-    })
+    }, {withCredentials: true})
     .then((response) => {
       const userData = response.data;
       this.context.login(userData);
