@@ -1,14 +1,23 @@
 import React, {useReducer, createContext} from 'react';
+import jwtDecode from 'jwt-decode';
 
 const initialState = {
-    user: { username: "steve" }
+    user: null
 };
 
-// TODO: If the token is in the cookies, decode it, check if it's still valid and set the user in the initialstate
+if (localStorage.getItem('JWT')) {
+    const decodedToken = jwtDecode(localStorage.getItem('JWT'));
+  
+    if (decodedToken.exp * 1000 < Date.now()) {
+      localStorage.removeItem('JWT');
+    } else {
+      initialState.user = decodedToken.user;
+    }
+}
 
 const AuthContext = createContext({
     user: null,
-    login: (userData) => {},
+    login: (token) => {},
     logout: () => {}
 });
 
@@ -32,7 +41,12 @@ function authReducer(state, action) {
 function AuthProvider(props) {
     const [ state, dispatch ] = useReducer(authReducer, initialState);
 
-    function login(userData) {
+    function login(token) {
+        localStorage.setItem('JWT', token);
+        const userData = jwtDecode(localStorage.getItem('JWT')).user;
+
+        console.log(userData);
+
         dispatch({
             type: 'LOGIN',
             payload: userData
@@ -40,7 +54,7 @@ function AuthProvider(props) {
     }
 
     function logout() {
-        // TODO: Remove the token from cookies
+        localStorage.removeItem('JWT');
         dispatch({ type: 'LOGOUT' });
     }
 

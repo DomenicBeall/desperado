@@ -42,8 +42,8 @@ class Form extends Component {
       data: { email: this.state.email, password: this.state.password }
     }, {withCredentials: true})
     .then((response) => {
-      const userData = response.data;
-      this.context.login(userData);
+      const token = response.data;
+      this.context.login(token);
     })
     .catch((error) => {
       console.error(error);

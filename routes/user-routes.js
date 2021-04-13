@@ -32,10 +32,7 @@ module.exports = (app) => {
                         console.error(err);
                         res.status(401).end();
                     } else {
-                        // Set a cookie on the user
-                        res.cookie("token", token, { maxAge: jwtExpiryTime * 1000 });
-                        
-                        res.json(user);
+                        res.json(token);
                     }
                 });
             } else {
