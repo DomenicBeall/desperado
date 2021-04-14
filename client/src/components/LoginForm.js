@@ -67,7 +67,6 @@ class Form extends Component {
             name="email"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="Email..."
           />
           <label for="password">Password</label>
           <input
@@ -76,7 +75,6 @@ class Form extends Component {
             name="password"
             onChange={this.handleInputChange}
             type="password"
-            placeholder="Password..."
           />
           <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
           <p style={{textAlign: "center"}}>Haven't got an account? <Link to="/register" style={{ fontWeight: "bold" }}>Click here!</Link></p>

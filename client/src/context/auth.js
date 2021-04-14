@@ -45,8 +45,6 @@ function AuthProvider(props) {
         localStorage.setItem('JWT', token);
         const userData = jwtDecode(localStorage.getItem('JWT')).user;
 
-        console.log(userData);
-
         dispatch({
             type: 'LOGIN',
             payload: userData
@@ -54,6 +52,8 @@ function AuthProvider(props) {
     }
 
     function logout() {
+        console.log("Logging out");
+
         localStorage.removeItem('JWT');
         dispatch({ type: 'LOGOUT' });
     }
