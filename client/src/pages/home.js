@@ -6,12 +6,7 @@ function Home(){
 
     return(
         <div>
-            <h1>Welcome to the home page!</h1>
-            {user ? 
-                <h1>Hi there, {user.username}</h1> 
-                :
-                <h1>You're not logged in</h1>
-            }
+            <h1 className="hook-title">A platform for finding over the board chess games in your area!</h1>
         </div>
     );
 }

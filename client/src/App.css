@@ -1,4 +1,100 @@
-h1 {
+@import url("https://use.typekit.net/ads2wbu.css");
+
+* {
+  color: white;
+  font-family: basic-sans, sans-serif;
+}
+
+.background {
+
+  background-image: url("./assets/img/background-checker.png");
+  background-repeat: repeat;
+  background-size: cover;
+
+  filter: blur(10px) brightness(50%);
+
+  height: 100vh;
+  width: 100vw;
+
+  transform: scale(1.05);
+
+  position: fixed;
+
+  z-index: -10;
+}
+
+.vignette {
+  background: radial-gradient(transparent, black), transparent;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: -9;
+}
+
+.header-logo {
+  color: white;
+
+  height: 4rem;
+}
+
+.header {
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-buttons {
+  flex-direction: row;
+  display: flex;
+}
+
+.header-button {
+  margin-left: 1rem;
+  padding: 1rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  height: 100%;
+  border: white solid 3px;
+  border-radius: 5px;
+  font-weight: 700;
+
+  transition: all 0.1s ease-in;
+}
+
+.hb-filled, .hb-clear:hover {
+  background-color: white;
+  background: white;
+  color: black;
+}
+
+.hb-filled:hover, .hb-clear {
+  background-color: transparent;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  padding: 30px;
+}
+
+hr {
+  border: none;
+  height: 5px;
+  color: white;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.hook-title {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
   text-align: center;
-  color: rgb(110, 94, 39);
+  font-size: 3.5rem;
+  padding-top: 10%;
 }
