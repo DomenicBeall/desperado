@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from 'axios';
 import { AuthContext } from "../context/auth";
+import { Link } from "react-router-dom";
 
 // TODO: I'd prefer to change this to a functional component once I really feel I understand context
 
@@ -78,9 +79,10 @@ class Form extends Component {
             placeholder="Password..."
           />
           <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
+          <p style={{textAlign: "center"}}>Haven't got an account? <Link to="/register" style={{ fontWeight: "bold" }}>Click here!</Link></p>
         </form>
       </div>
-    );
+    ); 
   }
 }
 
