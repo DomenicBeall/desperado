@@ -3,8 +3,10 @@ import LoginForm from '../components/LoginForm';
 function Login(){
     return(
         <div className="container">
-            <h1>Welcome to the login page!</h1>
-            <LoginForm/>
+            <div className="center-align-children">
+                <h1>Log In</h1>
+                <LoginForm/>
+            </div>
         </div>
     );
 }

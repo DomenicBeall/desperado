@@ -59,21 +59,25 @@ class Form extends Component {
     return (
       <div>
         <form className="form">
+          <label for="email">Email</label>
           <input
+            id="email"
             value={this.state.email}
             name="email"
             onChange={this.handleInputChange}
             type="text"
-            placeholder="First Name"
+            placeholder="Email..."
           />
+          <label for="password">Password</label>
           <input
+            id="password"
             value={this.state.password}
             name="password"
             onChange={this.handleInputChange}
             type="password"
-            placeholder="Password"
+            placeholder="Password..."
           />
-          <button onClick={this.handleFormSubmit}>Submit</button>
+          <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
         </form>
       </div>
     );
