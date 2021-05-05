@@ -1,8 +1,12 @@
+import RegisterForm from '../components/RegisterForm';
 
 function Register(){
     return(
-        <div>
-            <h1>Welcome to the register page!</h1>
+        <div className="container">
+            <div className="center-align-children">
+                <h1>Register</h1>
+                <RegisterForm/>
+            </div>
         </div>
     );
 }

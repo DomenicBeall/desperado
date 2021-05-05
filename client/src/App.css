@@ -118,7 +118,7 @@ hr {
   margin-right: auto;
 }
 
-.form > input {
+input {
   margin-bottom: 1rem;
   height: 3rem;
   background-color: transparent;

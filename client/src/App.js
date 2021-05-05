@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { AuthProvider } from './context/auth';
 
 import AntiAuthRoute from './context/AntiAuthRoute';
+import AuthRoute from './context/AuthRoute';
 import { Helmet } from 'react-helmet';
 
 import Header from './components/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import CreateGame from './pages/CreateGame';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <AntiAuthRoute exact path="/login" component={Login} />
             <AntiAuthRoute exact path="/register" component={Register}/>
+            <AuthRoute exact path="/create" component={CreateGame} />
           </Router>
         </div>
       </AuthProvider>

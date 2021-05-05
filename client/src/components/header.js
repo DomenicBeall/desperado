@@ -18,6 +18,7 @@ function Header() {
                 </div>
             :
                 <div className="header-buttons">
+                    <HeaderButton to="/create" theme="hb-clear">Create Game</HeaderButton>
                     <HeaderButton to="/" theme="hb-clear" onClick={logout}>Log Out</HeaderButton>
                 </div>
             }

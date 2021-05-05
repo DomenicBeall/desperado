@@ -50,6 +50,8 @@ module.exports = (app) => {
         // Get the sign up details out of the request body
         const { email, username, password, confirmPassword } = req.body;
 
+        console.log(req.body);
+
         // TODO: Compact the next couple of checks into one if statement. At the moment it's broken up like this for readability.
 
         // Ensure that all of the fields are valid
@@ -80,14 +82,13 @@ module.exports = (app) => {
                     res.redirect(307, '/api/login');
                 })
                 .catch(error => {
+                    console.log(error);
                     res.status(401);
-                    res.json(error);
                 });
             }
         })
         .catch(error => {
             res.status(401);
-            res.json(error);
         });
 
         

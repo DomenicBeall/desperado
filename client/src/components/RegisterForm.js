@@ -9,7 +9,9 @@ class Form extends Component {
   // Setting the component's initial state
   state = {
     email: "",
-    password: ""
+    password: "",
+    username: "",
+    confirmPassword: ""
   };
 
   handleInputChange = event => {
@@ -36,13 +38,19 @@ class Form extends Component {
       alert("Passwords must be at least 6 characters in length.");
     }
 
-    // Send a request to the server to log in the user and then log the user in through context
+    // Send a request to the server to register the user
     Axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/login', 
-      data: { email: this.state.email, password: this.state.password }
+      url: 'http://localhost:3000/api/register', 
+      data: { 
+        email: this.state.email,
+        username: this.state.username, 
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword
+      }
     }, {withCredentials: true})
     .then((response) => {
+      // TODO: Probably need something here to display errors in the UI
       const token = response.data;
       this.context.login(token);
     })
@@ -60,6 +68,14 @@ class Form extends Component {
     return (
       <div>
         <form className="form">
+          <label htmlFor="username">Username</label>
+          <input
+            id="username"
+            value={this.state.username}
+            name="username"
+            onChange={this.handleInputChange}
+            type="text"
+          />
           <label htmlFor="email">Email</label>
           <input
             id="email"
@@ -75,6 +91,14 @@ class Form extends Component {
             name="password"
             onChange={this.handleInputChange}
             type="password"
+          />
+          <label htmlFor="password">Confirm password</label>
+          <input
+            id="confirmPassword"
+            value={this.state.confirmPassword}
+            name="confirmPassword"
+            onChange={this.handleInputChange}
+            type="confirmPassword"
           />
           <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
           <p style={{textAlign: "center"}}>Haven't got an account? <Link to="/register" style={{ fontWeight: "bold" }}>Click here!</Link></p>
