@@ -131,6 +131,8 @@ input {
   color: white;
   font-size: 1rem;
   padding-left: 10px;
+
+  width: 100%;
 }
 
 .form > button {
@@ -153,4 +155,26 @@ input {
 
 ::-ms-input-placeholder { /* Microsoft Edge */
   color: white;
+}
+
+.suggestion-item > span, .suggestion-item--active > span {
+  color: black;
+}
+
+.suggestion-item, .suggestion-item--active {
+  background-color: white;
+  padding: 0.5rem;
+}
+
+.suggestion-item:hover, .suggestion-item--active:hover {
+  background-color: rgb(224, 224, 224);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.autocomplete-dropdown-container {
+  position: absolute;
+  padding-left: 0.5rem;
+
+  z-index: 5;
 }

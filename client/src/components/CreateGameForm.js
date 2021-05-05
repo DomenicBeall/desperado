@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Axios from 'axios';
 import { AuthContext } from "../context/auth";
-import { Link } from "react-router-dom";
+
+import LocationSearchInput from '../components/LocationSearchInput';
+import { Redirect } from "react-router";
 
 // TODO: I'd prefer to change this to a functional component once I really feel I understand context
 
@@ -9,8 +11,14 @@ class Form extends Component {
   // Setting the component's initial state
   state = {
     location: "",
-    time: ""
+    time: "",
+    redirect: false
   };
+
+  handleLocationChange = (value) => {
+    console.log(this.state.location);
+    this.setState({ "location": value });
+  }
 
   handleInputChange = event => {
     let value = event.target.value;
@@ -45,6 +53,7 @@ class Form extends Component {
     .then((response) => {
       // TODO: Probably need something here to display errors in the UI
       // TODO: Redirect the user to the created challenge page
+      this.setState({ redirect: true });
     })
     .catch((error) => {
       console.error(error);
@@ -57,17 +66,14 @@ class Form extends Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div>
         <form className="form">
-          <label htmlFor="location">Location</label>
-          <input
-            id="location"
-            value={this.state.location}
-            name="location"
-            onChange={this.handleInputChange}
-            type="text"
-          />
+          <LocationSearchInput stateChanger={this.handleLocationChange} />
           <label htmlFor="time">Date and Time</label>
           <input
             id="time"
