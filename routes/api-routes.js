@@ -1,11 +1,27 @@
+const mongoose = require("mongoose");
 const Authenticate = require("../middleware/authenticate.js");
+
+const Game = require("../models/game");
 
 module.exports = (app) => {
 
-    app.post('/api/createChallenge', Authenticate, (req, res) => {
+    app.post('/api/createChallenge', (req, res) => {
+
+        console.log("The create challenge endpoint has been hit. Body = " + JSON.stringify(req.body));
+
         // This needs access to the user ID, which should perhaps be sent in the request body
-        const user = req.user;
-        const challenge = req.body;
+        const { user, location, time } = req.body;
+
+        Game.create({ location: location, time: time, challenger: mongoose.Types.ObjectId(user)})
+            .then((game) => {
+                console.log("A new game has been created!");
+                res.status(201).end();
+            })
+            .catch((error) => {
+                console.log(error);
+                res.status(400).end();
+            });
+
     });
 
     app.get('/api/challenge/:id', (req, res) => {

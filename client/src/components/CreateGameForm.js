@@ -8,21 +8,15 @@ import { Link } from "react-router-dom";
 class Form extends Component {
   // Setting the component's initial state
   state = {
-    email: "",
-    password: "",
-    username: "",
-    confirmPassword: ""
+    location: "",
+    time: ""
   };
 
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
 
-    if (name === "password") {
-      value = value.substring(0, 15);
-    }
-
-    //TODO: Add check to ensure email is valid
+    //TODO: Add check to ensure time is in future
 
     this.setState({
       [name]: value
@@ -32,35 +26,33 @@ class Form extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    if (!this.state.email) {
-      alert("Please add an email address.");
-    } else if (this.state.password.length < 6) {
-      alert("Passwords must be at least 6 characters in length.");
+    if (!this.state.location) {
+      alert("Please add a location.");
+    } else if (!this.state.time) {
+      alert("Please ensure there is a date and time.");
     }
 
     // Send a request to the server to register the user
     Axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/register', 
+      url: 'http://localhost:3000/api/createChallenge', 
       data: { 
-        email: this.state.email,
-        username: this.state.username, 
-        password: this.state.password,
-        confirmPassword: this.state.confirmPassword
+        location: this.state.location,
+        time: this.state.time, 
+        challenger: this.context.user._id
       }
     }, {withCredentials: true})
     .then((response) => {
       // TODO: Probably need something here to display errors in the UI
-      const token = response.data;
-      this.context.login(token);
+      // TODO: Redirect the user to the created challenge page
     })
     .catch((error) => {
       console.error(error);
     });
 
     this.setState({
-      email: "",
-      password: ""
+      location: "",
+      time: ""
     });
   };
 
@@ -68,40 +60,23 @@ class Form extends Component {
     return (
       <div>
         <form className="form">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="location">Location</label>
           <input
-            id="username"
-            value={this.state.username}
-            name="username"
+            id="location"
+            value={this.state.location}
+            name="location"
             onChange={this.handleInputChange}
             type="text"
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="time">Date and Time</label>
           <input
-            id="email"
-            value={this.state.email}
-            name="email"
+            id="time"
+            value={this.state.time}
+            name="time"
             onChange={this.handleInputChange}
-            type="text"
+            type="datetime-local"
           />
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            value={this.state.password}
-            name="password"
-            onChange={this.handleInputChange}
-            type="password"
-          />
-          <label htmlFor="password">Confirm password</label>
-          <input
-            id="confirmPassword"
-            value={this.state.confirmPassword}
-            name="confirmPassword"
-            onChange={this.handleInputChange}
-            type="confirmPassword"
-          />
-          <button className="hb-filled" onClick={this.handleFormSubmit}>Sign In</button>
-          <p style={{textAlign: "center"}}>Haven't got an account? <Link to="/register" style={{ fontWeight: "bold" }}>Click here!</Link></p>
+          <button className="hb-filled" onClick={this.handleFormSubmit}>Create Challenge</button>
         </form>
       </div>
     ); 

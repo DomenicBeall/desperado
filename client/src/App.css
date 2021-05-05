@@ -61,6 +61,8 @@
   font-weight: 700;
 
   transition: all 0.1s ease-in;
+
+  cursor: pointer;
 }
 
 .hb-filled, .hb-clear:hover {
@@ -70,11 +72,13 @@
   border: white solid 3px;
   border-radius: 5px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .hb-filled:hover, .hb-clear {
   background-color: transparent;
   color: white;
+  cursor: pointer;
 }
 
 a {
