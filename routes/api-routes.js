@@ -10,9 +10,9 @@ module.exports = (app) => {
         console.log("The create challenge endpoint has been hit. Body = " + JSON.stringify(req.body));
 
         // This needs access to the user ID, which should perhaps be sent in the request body
-        const { user, location, time } = req.body;
+        const { challenger, location, time } = req.body;
 
-        Game.create({ location: location, time: time, challenger: mongoose.Types.ObjectId(user)})
+        Game.create({ location: location, time: time, challenger: mongoose.Types.ObjectId(challenger)})
             .then((game) => {
                 console.log("A new game has been created!");
                 res.status(201).end();
@@ -22,6 +22,20 @@ module.exports = (app) => {
                 res.status(400).end();
             });
 
+    });
+
+    app.post('/api/acceptChallenge/:id', (req, res) => {
+        const id = req.params.id;
+        const responder = req.body.responder;
+        
+        Game.findOneAndUpdate({ _id: id }, { responder: mongoose.Types.ObjectId(responder) })
+        .then((game) => {
+            res.status(200).end();
+        })
+        .catch((error) => {
+            console.log(error);
+            res.status(400).end();
+        });
     });
 
     app.get('/api/challenge/:id', (req, res) => {
@@ -43,7 +57,13 @@ module.exports = (app) => {
     });
 
     app.get('/api/getAll', (req, res) => {
+        const { user } = req.body;
         // This will take in several possible parameters in the body and then return the appropriate list of challenges
+        Game.find({ responder: { $exists: false }, user: {$ne: mongoose.Types.ObjectId(user) }}).populate("challenger").then(
+            (games) => {
+                res.json(games);
+            }
+        );
     });
 
 }

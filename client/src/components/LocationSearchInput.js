@@ -20,7 +20,7 @@ export default class LocationSearchInput extends React.Component {
     this.setState({ address });
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
-      .then(latLng => this.stateChanger(latLng))
+      .then(latLng => this.stateChanger({ address, ...latLng}))
       .catch(error => console.error('Error', error));
   };
 

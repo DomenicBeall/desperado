@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const GameSchema = new Schema({
     location: {
-        type: { lat : { type: String }, long : { type: String } },
+        type: { lat : { type: String }, long : { type: String }, address: { type: String } },
         required: "Games require a location"
     }, 
     time: {

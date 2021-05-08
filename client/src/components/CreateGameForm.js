@@ -10,14 +10,14 @@ import { Redirect } from "react-router";
 class Form extends Component {
   // Setting the component's initial state
   state = {
-    location: "",
+    location: {},
     time: "",
     redirect: false
   };
 
   handleLocationChange = (value) => {
-    console.log(this.state.location);
     this.setState({ "location": value });
+    console.log(this.state.location);
   }
 
   handleInputChange = event => {
@@ -44,7 +44,7 @@ class Form extends Component {
     Axios({
       method: 'POST',
       url: 'http://localhost:3000/api/createChallenge', 
-      data: { 
+      data: {
         location: this.state.location,
         time: this.state.time, 
         challenger: this.context.user._id
@@ -60,7 +60,7 @@ class Form extends Component {
     });
 
     this.setState({
-      location: "",
+      location: {},
       time: ""
     });
   };

@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import CreateGame from './pages/CreateGame';
+import UserPage from './pages/User';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <AntiAuthRoute exact path="/login" component={Login} />
             <AntiAuthRoute exact path="/register" component={Register}/>
             <AuthRoute exact path="/create" component={CreateGame} />
+            <AuthRoute exact path="/user" component={UserPage} />
           </Router>
         </div>
       </AuthProvider>
