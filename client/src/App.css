@@ -295,3 +295,22 @@ input {
   }
 }
 /* LOADER END */
+
+.game-row {
+  height: 10vh;
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  margin-top: 1rem;
+  border: white solid 5px;
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}

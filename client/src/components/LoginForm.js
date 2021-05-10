@@ -34,26 +34,26 @@ class Form extends Component {
       alert("Please add an email address.");
     } else if (this.state.password.length < 6) {
       alert("Passwords must be at least 6 characters in length.");
+    } else {
+      // Send a request to the server to log in the user and then log the user in through context
+      Axios({
+        method: 'POST',
+        url: 'http://localhost:3000/api/login', 
+        data: { email: this.state.email, password: this.state.password }
+      }, {withCredentials: true})
+      .then((response) => {
+        const token = response.data;
+        this.context.login(token);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
+      this.setState({
+        email: "",
+        password: ""
+      });
     }
-
-    // Send a request to the server to log in the user and then log the user in through context
-    Axios({
-      method: 'POST',
-      url: 'http://localhost:3000/api/login', 
-      data: { email: this.state.email, password: this.state.password }
-    }, {withCredentials: true})
-    .then((response) => {
-      const token = response.data;
-      this.context.login(token);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-
-    this.setState({
-      email: "",
-      password: ""
-    });
   };
 
   render() {

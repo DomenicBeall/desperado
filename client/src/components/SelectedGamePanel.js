@@ -23,7 +23,7 @@ export default function SelectedGamePanel(props) {
           }, {withCredentials: true})
           .then((response) => {
             setButtonContent("Challenge accepted!");
-            //setRedirect("/user"); // Redirect to user account or game screen
+            setRedirect("/user"); // Redirect to user account or game screen
           })
           .catch((error) => {
             console.error(error);
@@ -42,7 +42,7 @@ export default function SelectedGamePanel(props) {
                     <div>
                     <h1 style={{ color: "black" }}>{props.game ? props.game.challenger.username : ""}</h1>
                     <h3 style={{ color: "black" }}>{props.game ? props.game.location.address : ""}</h3>
-                    <h3 style={{ color: "black" }}>{props.game ? props.game.time : ""}</h3>
+                    <h3 style={{ color: "black" }}>{props.game ? new Date(props.game.time).toLocaleString() : ""}</h3>
                     </div>
                 :
                     <></>

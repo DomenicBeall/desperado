@@ -56,10 +56,26 @@ module.exports = (app) => {
         // TODO: Find a challenge by that id, check it was made by the current user, user the request body to update the challenge
     });
 
-    app.get('/api/getAll', (req, res) => {
-        const { user } = req.body;
+    app.get('/api/getChallenges/:id', (req, res) => {
+        const user = req.params.id;
+
+        console.log(user);
+
         // This will take in several possible parameters in the body and then return the appropriate list of challenges
-        Game.find({ responder: { $exists: false }, user: {$ne: mongoose.Types.ObjectId(user) }}).populate("challenger").then(
+        Game.find({ responder: { $exists: false }, challenger: { $ne: mongoose.Types.ObjectId(user) }}).populate("challenger").then(
+            (games) => {
+                res.json(games);
+            }
+        );
+    });
+
+    app.get('/api/getAll/:id', (req, res) => {
+        const user = req.params.id;
+
+        Game.find({$or: [{ challenger: mongoose.Types.ObjectId(user) }, { responder: mongoose.Types.ObjectId(user) }]})
+        .populate("challenger")
+        .populate("responder")
+        .then(
             (games) => {
                 res.json(games);
             }

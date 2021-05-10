@@ -10,21 +10,18 @@ import { Redirect } from "react-router";
 class Form extends Component {
   // Setting the component's initial state
   state = {
-    location: {},
+    location: undefined,
     time: "",
     redirect: false
   };
 
   handleLocationChange = (value) => {
     this.setState({ "location": value });
-    console.log(this.state.location);
   }
 
   handleInputChange = event => {
     let value = event.target.value;
     const name = event.target.name;
-
-    //TODO: Add check to ensure time is in future
 
     this.setState({
       [name]: value
@@ -34,10 +31,14 @@ class Form extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
+    //TODO: Add check to ensure time is in future
+
     if (!this.state.location) {
       alert("Please add a location.");
     } else if (!this.state.time) {
       alert("Please ensure there is a date and time.");
+    } else if (this.state.time < new Date()) {
+      alert("The time must be in the future");
     }
 
     // Send a request to the server to register the user

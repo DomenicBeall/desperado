@@ -34,10 +34,7 @@ export default class GameMap extends Component {
     setMarkers() {
         axios({
             method: 'GET',
-            url: 'http://localhost:3000/api/getAll', 
-            data: { 
-              user: this.context.user._id
-            }
+            url: 'http://localhost:3000/api/getChallenges/' + this.context.user._id
         }
         )
         .then((games) => {
@@ -61,7 +58,6 @@ export default class GameMap extends Component {
             <div style={{ height: "95%", width: "100%", display: "flex"}}>
                 <SelectedGamePanel 
                     game={this.state.currentGame}
-                    setMarkers={ this.setMarkers() }
                 /> 
                 
                 <div style={{ height: "100%", backgroundColor: "white", width: "100%"}}>
