@@ -40,7 +40,17 @@ export default function SelectedGamePanel(props) {
             {
                 props.game ?
                     <div>
-                    <h1 style={{ color: "black" }}>{props.game ? props.game.challenger.username : ""}</h1>
+                    <h1 style={{ color: "black" }}>
+                        {
+                            props.game ? 
+                            (props.game.challenger.username === user.username) ?
+                                "You"
+                                :
+                                props.game.challenger.username
+                            : 
+                            ""
+                        }
+                    </h1>
                     <h3 style={{ color: "black" }}>{props.game ? props.game.location.address : ""}</h3>
                     <h3 style={{ color: "black" }}>{props.game ? new Date(props.game.time).toLocaleString() : ""}</h3>
                     </div>
@@ -50,7 +60,12 @@ export default function SelectedGamePanel(props) {
             {
                 props.game ?
                     <div>
+                    {
+                        (props.game.challenger.username === user.username) ?
+                        <></>
+                        :
                         <div className="btn-solid" onClick={() => { acceptChallenge(props.game._id); }}>{buttonContent}</div>
+                    }
                     </div>
                 :
                     <></>

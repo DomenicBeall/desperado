@@ -69,7 +69,7 @@ export default class GameMap extends Component {
                         {
                             this.state.games.map(game => (
                                 <div className="map-icon" key={ game.index } lat={game.location.lat} lng={game.location.lng} text="Game" onClick={() => {console.log(this.setGame(game))}}>
-                                    <img src="./icon-pawn.svg" style={{ width: "50px", height: "50px", transform: "translate(-50%, -50%)"}} alt="Map marker" />
+                                    <img src={ (this.context.user.username === game.challenger.username) ? "./icon-pawn-hollow.svg" : "./icon-pawn.svg" } style={{ width: "50px", height: "50px", transform: "translate(-50%, -50%)"}} alt="Map marker" />
                                 </div>
                             ))
                         }

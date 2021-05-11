@@ -59,11 +59,6 @@ class Form extends Component {
     .catch((error) => {
       console.error(error);
     });
-
-    this.setState({
-      location: {},
-      time: ""
-    });
   };
 
   render() {

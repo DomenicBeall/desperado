@@ -58,11 +58,9 @@ module.exports = (app) => {
 
     app.get('/api/getChallenges/:id', (req, res) => {
         const user = req.params.id;
-
-        console.log(user);
-
+        
         // This will take in several possible parameters in the body and then return the appropriate list of challenges
-        Game.find({ responder: { $exists: false }, challenger: { $ne: mongoose.Types.ObjectId(user) }}).populate("challenger").then(
+        Game.find({ responder: { $exists: false } }).populate("challenger").then(
             (games) => {
                 res.json(games);
             }
